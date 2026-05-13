@@ -1,0 +1,26 @@
+{
+  "service": {
+    "channel": "ibm_quantum_platform",
+    "instance": "ADQNN-GAGE"
+  },
+  "experiment": {
+    "backends": ["ibm_torino"],
+    "n_qubits": 5,
+    "depths": [2, 4, 6, 8, 10, 15, 20],
+    "shots": 1000,
+    "optimization_level": 1,
+    "seed_transpiler": 42,
+    "qubit_mapping": [55, 65, 66, 67, 68]
+  },
+  "output": {
+    "results_dir": "results",
+    "results_file": "depth_threshold_results.json",
+    "plot_file": "depth_threshold_analysis.png",
+    "dpi": 300
+  },
+  "fidelity_thresholds": {
+    "high": 0.90,
+    "medium": 0.85,
+    "low": 0.80
+  }
+}

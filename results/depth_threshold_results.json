@@ -1,0 +1,293 @@
+{
+  "metadata": {
+    "timestamp": "2026-01-31T22:28:54.585936",
+    "n_qubits": 5,
+    "depths": [
+      2,
+      4,
+      6,
+      8,
+      10,
+      15,
+      20
+    ],
+    "shots": 1000,
+    "backends": [
+      "ibm_torino"
+    ],
+    "qubit_mapping": [
+      55,
+      65,
+      66,
+      67,
+      68
+    ]
+  },
+  "data": {
+    "ibm_torino": {
+      "depth_2": {
+        "job_id": "d5vdd2ibju6s73bbnveg",
+        "circuit_depth_logical": 2,
+        "circuit_depth_transpiled": 22,
+        "gate_count": 49,
+        "cx_count": 0,
+        "ecr_count": 0,
+        "cz_count": 8,
+        "two_qubit_gates": 8,
+        "counts": {
+          "11111": 409,
+          "00000": 485,
+          "01111": 7,
+          "10111": 19,
+          "10000": 4,
+          "11110": 18,
+          "11000": 13,
+          "00111": 8,
+          "00001": 6,
+          "11001": 1,
+          "11101": 10,
+          "00100": 1,
+          "00010": 3,
+          "10110": 1,
+          "00101": 2,
+          "11011": 4,
+          "00011": 1,
+          "11100": 3,
+          "01010": 1,
+          "01000": 2,
+          "00110": 1,
+          "01101": 1
+        },
+        "metrics": {
+          "ghz_fidelity": 0.894,
+          "parity_expectation": 0.122,
+          "heavy_output_frequency": 0.983
+        }
+      },
+      "depth_4": {
+        "job_id": "d5vdd9qbju6s73bbnvl0",
+        "circuit_depth_logical": 4,
+        "circuit_depth_transpiled": 28,
+        "gate_count": 67,
+        "cx_count": 0,
+        "ecr_count": 0,
+        "cz_count": 16,
+        "two_qubit_gates": 16,
+        "counts": {
+          "00000": 509,
+          "11111": 396,
+          "10111": 18,
+          "00011": 7,
+          "11110": 14,
+          "11011": 6,
+          "11101": 8,
+          "00111": 9,
+          "01000": 5,
+          "01111": 4,
+          "00001": 12,
+          "10000": 6,
+          "11100": 2,
+          "01100": 1,
+          "11000": 2,
+          "00010": 1
+        },
+        "metrics": {
+          "ghz_fidelity": 0.905,
+          "parity_expectation": 0.138,
+          "heavy_output_frequency": 0.973
+        }
+      },
+      "depth_6": {
+        "job_id": "d5vddb3uf71s73cihoj0",
+        "circuit_depth_logical": 6,
+        "circuit_depth_transpiled": 34,
+        "gate_count": 85,
+        "cx_count": 0,
+        "ecr_count": 0,
+        "cz_count": 24,
+        "two_qubit_gates": 24,
+        "counts": {
+          "00000": 447,
+          "11111": 432,
+          "00010": 2,
+          "00011": 5,
+          "10111": 17,
+          "10001": 1,
+          "01000": 6,
+          "01111": 8,
+          "00111": 12,
+          "11100": 2,
+          "10000": 8,
+          "11000": 7,
+          "11011": 7,
+          "10110": 2,
+          "11101": 10,
+          "11110": 15,
+          "00100": 4,
+          "11001": 1,
+          "00001": 13,
+          "01101": 1
+        },
+        "metrics": {
+          "ghz_fidelity": 0.879,
+          "parity_expectation": 0.034,
+          "heavy_output_frequency": 0.962
+        }
+      },
+      "depth_8": {
+        "job_id": "d5vddcl7fc0s73att600",
+        "circuit_depth_logical": 8,
+        "circuit_depth_transpiled": 40,
+        "gate_count": 103,
+        "cx_count": 0,
+        "ecr_count": 0,
+        "cz_count": 32,
+        "two_qubit_gates": 32,
+        "counts": {
+          "11111": 385,
+          "00000": 489,
+          "11011": 6,
+          "11110": 11,
+          "10111": 23,
+          "11000": 6,
+          "10001": 2,
+          "10000": 11,
+          "01111": 10,
+          "00111": 14,
+          "11101": 12,
+          "00011": 6,
+          "01000": 6,
+          "11100": 1,
+          "00001": 9,
+          "00100": 1,
+          "10110": 2,
+          "01110": 1,
+          "10100": 1,
+          "01001": 1,
+          "10101": 1,
+          "00010": 2
+        },
+        "metrics": {
+          "ghz_fidelity": 0.874,
+          "parity_expectation": 0.134,
+          "heavy_output_frequency": 0.964
+        }
+      },
+      "depth_10": {
+        "job_id": "d5vddk3uf71s73cihovg",
+        "circuit_depth_logical": 10,
+        "circuit_depth_transpiled": 46,
+        "gate_count": 121,
+        "cx_count": 0,
+        "ecr_count": 0,
+        "cz_count": 40,
+        "two_qubit_gates": 40,
+        "counts": {
+          "00000": 484,
+          "11111": 379,
+          "00001": 8,
+          "11011": 12,
+          "10111": 31,
+          "11000": 8,
+          "11101": 25,
+          "01111": 7,
+          "10000": 9,
+          "00111": 13,
+          "01000": 4,
+          "11110": 8,
+          "01101": 1,
+          "00101": 1,
+          "00010": 2,
+          "01100": 1,
+          "10011": 1,
+          "00100": 1,
+          "10101": 1,
+          "00011": 3,
+          "11001": 1
+        },
+        "metrics": {
+          "ghz_fidelity": 0.863,
+          "parity_expectation": 0.16,
+          "heavy_output_frequency": 0.977
+        }
+      },
+      "depth_15": {
+        "job_id": "d5vddlabju6s73bbo020",
+        "circuit_depth_logical": 15,
+        "circuit_depth_transpiled": 61,
+        "gate_count": 166,
+        "cx_count": 0,
+        "ecr_count": 0,
+        "cz_count": 60,
+        "two_qubit_gates": 60,
+        "counts": {
+          "00001": 7,
+          "00000": 488,
+          "11111": 363,
+          "11101": 23,
+          "10111": 32,
+          "00011": 2,
+          "01111": 13,
+          "00111": 7,
+          "11110": 21,
+          "10000": 5,
+          "01000": 7,
+          "11011": 11,
+          "00100": 3,
+          "11000": 7,
+          "00010": 2,
+          "11100": 3,
+          "00101": 1,
+          "01011": 2,
+          "10101": 1,
+          "10110": 1,
+          "11001": 1
+        },
+        "metrics": {
+          "ghz_fidelity": 0.851,
+          "parity_expectation": 0.196,
+          "heavy_output_frequency": 0.951
+        }
+      },
+      "depth_20": {
+        "job_id": "d5vddml7fc0s73att6b0",
+        "circuit_depth_logical": 20,
+        "circuit_depth_transpiled": 76,
+        "gate_count": 211,
+        "cx_count": 0,
+        "ecr_count": 0,
+        "cz_count": 80,
+        "two_qubit_gates": 80,
+        "counts": {
+          "11111": 382,
+          "00000": 455,
+          "10101": 4,
+          "11000": 6,
+          "01000": 12,
+          "10111": 29,
+          "00111": 12,
+          "10000": 7,
+          "00101": 2,
+          "00001": 3,
+          "11010": 2,
+          "11011": 17,
+          "11110": 14,
+          "11101": 25,
+          "01111": 11,
+          "00110": 1,
+          "00010": 3,
+          "00100": 2,
+          "11100": 3,
+          "11001": 4,
+          "00011": 5,
+          "01101": 1
+        },
+        "metrics": {
+          "ghz_fidelity": 0.837,
+          "parity_expectation": 0.13,
+          "heavy_output_frequency": 0.97
+        }
+      }
+    }
+  }
+}
