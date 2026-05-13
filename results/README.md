@@ -1,19 +1,26 @@
 # Results Directory
 
-This directory contains all experimental outputs from the noise-adaptive depth threshold probe experiments run on IBM Quantum hardware.
-
----
+This directory contains experimental outputs from the noise-adaptive depth
+threshold probe on IBM Quantum hardware.
 
 ## Files
 
 | File | Description |
 |------|-------------|
-| `depth_threshold_results.json` | Raw measurement counts and computed metrics for all depth/qubit configurations |
-| `depth_threshold_analysis.png` | 3-panel plot: GHZ fidelity, parity expectation, and HOG vs circuit depth |
-| `gate_count_analysis.png` | 2-panel plot: fidelity vs CZ gate count and gate count scaling with depth |
-| `publication_figure.png` | Single publication-quality comparison figure (4q vs 5q fidelity decay) |
+| `depth_threshold_results.json` | Raw measurement counts and computed metrics for the 5-qubit depth sweep on `ibm_torino` |
+| `depth_threshold_analysis.png` | Analysis plot generated directly from `depth_threshold_results.json` |
+| `gate_count_analysis.png` | Summary plot comparing fidelity vs. CZ gate count and gate-count scaling |
+| `publication_figure.png` | Publication figure comparing 4-qubit and 5-qubit fidelity decay |
 
----
+## Important Scope Note
+
+- `depth_threshold_results.json` contains the raw saved dataset for the **5-qubit**
+  run only.
+- `publication_figure.png` and `gate_count_analysis.png` include **4-qubit and
+  5-qubit summary values** assembled in
+  [scripts/analyze_all_data.py](../scripts/analyze_all_data.py).
+- As a result, not every figure in this directory is generated solely from
+  `depth_threshold_results.json`.
 
 ## JSON Data Format
 
@@ -22,31 +29,31 @@ This directory contains all experimental outputs from the noise-adaptive depth t
 ```json
 {
   "metadata": {
-    "timestamp":     "<ISO 8601 datetime of experiment run>",
-    "n_qubits":      <int — number of qubits used>,
-    "depths":        [<int>, ...],
-    "shots":         <int — measurement shots per circuit>,
-    "backends":      ["<backend_name>", ...],
+    "timestamp": "<ISO 8601 datetime of experiment run>",
+    "n_qubits": <int, number of qubits used>,
+    "depths": [<int>, ...],
+    "shots": <int, measurement shots per circuit>,
+    "backends": ["<backend_name>", ...],
     "qubit_mapping": [<int>, ...]
   },
   "data": {
     "<backend_name>": {
       "depth_<N>": {
-        "job_id":                  "<IBM Quantum job ID string>",
-        "circuit_depth_logical":   <int — logical depth parameter passed to circuit builder>,
-        "circuit_depth_transpiled":<int — actual depth after Qiskit transpilation>,
-        "gate_count":              <int — total gate count in transpiled circuit>,
-        "cx_count":                <int — number of CX (CNOT) two-qubit gates>,
-        "ecr_count":               <int — number of ECR two-qubit gates>,
-        "cz_count":                <int — number of CZ two-qubit gates>,
-        "two_qubit_gates":         <int — sum of cx_count + ecr_count + cz_count>,
+        "job_id": "<IBM Quantum job ID string>",
+        "circuit_depth_logical": <int, logical depth parameter passed to circuit builder>,
+        "circuit_depth_transpiled": <int, actual depth after Qiskit transpilation>,
+        "gate_count": <int, total gate count in transpiled circuit>,
+        "cx_count": <int, number of CX two-qubit gates>,
+        "ecr_count": <int, number of ECR two-qubit gates>,
+        "cz_count": <int, number of CZ two-qubit gates>,
+        "two_qubit_gates": <int, sum of cx_count + ecr_count + cz_count>,
         "counts": {
-          "<bitstring>": <int — number of times this bitstring was observed>
+          "<bitstring>": <int, number of times this bitstring was observed>
         },
         "metrics": {
-          "ghz_fidelity":           <float in [0,1] — P(|00...0>) + P(|11...1>)>,
-          "parity_expectation":     <float in [-1,1] — <Z_0 Z_1 ... Z_n>>,
-          "heavy_output_frequency": <float in [0,1] — fraction of shots above median probability>
+          "ghz_fidelity": <float in [0,1], P(|00...0>) + P(|11...1>)>,
+          "parity_expectation": <float in [-1,1], computational-basis Z-parity average>,
+          "heavy_output_frequency": <float in [0,1], fraction of shots above median observed probability>
         }
       }
     }
@@ -54,36 +61,48 @@ This directory contains all experimental outputs from the noise-adaptive depth t
 }
 ```
 
-### Field Notes
+## Field Notes
 
-- **`bitstring`**: A binary string of length `n_qubits`. Qiskit orders bits right-to-left (qubit 0 is the rightmost character). E.g., `"11111"` = all qubits measured as 1.
-- **`ghz_fidelity`**: Approximation of GHZ state preparation fidelity. Defined as the fraction of shots in the two target states (`|00...0>` or `|11...1>`). Ideal noiseless value = 1.0.
-- **`parity_expectation`**: Expectation value of the n-qubit Z-parity operator. For a perfect GHZ state this equals +1; noise drives it toward 0.
-- **`heavy_output_frequency`**: HOG metric from quantum volume definition. Values significantly above 0.5 indicate the circuit is producing non-trivial quantum output.
-- **`circuit_depth_logical`** vs **`circuit_depth_transpiled`**: Logical depth is the parameter passed to `build_ghz_circuit()`. Transpiled depth is larger due to native gate decomposition on the Heron r2 architecture (CZ, SX, RZ basis set).
+- **`bitstring`**: A binary string of length `n_qubits`. Qiskit orders bits
+  right-to-left, so qubit 0 is the rightmost character.
+- **`ghz_fidelity`**: Approximate GHZ-state preparation fidelity, defined here as
+  the fraction of shots in the two target states `|00...0>` and `|11...1>`.
+- **`parity_expectation`**: Average value of the computational-basis parity
+  statistic `(-1)^(number of measured 1s)`. This is a population-based parity
+  summary, not a full coherence witness. For odd-qubit GHZ populations, the ideal
+  value is not generally `+1`.
+- **`heavy_output_frequency`**: Heavy-output-generation style metric computed from
+  the observed output distribution.
+- **`circuit_depth_logical`** vs **`circuit_depth_transpiled`**: Logical depth is
+  the parameter passed to `build_ghz_circuit()`. Transpiled depth is the compiled
+  depth after decomposition to the backend basis gates.
 
----
-
-## Experimental Conditions
+## Experimental Conditions for `depth_threshold_results.json`
 
 - **Hardware**: IBM Torino (Heron r2, 133 qubits)
-- **Qubit chain**: [55, 65, 66, 67, 68]
-- **Calibration date**: 2026-01-31
-- **Shots per circuit**: 1000
+- **Backend name**: `ibm_torino`
+- **Run type**: 5-qubit GHZ depth sweep
+- **Qubit chain**: `[55, 65, 66, 67, 68]`
+- **Timestamp**: `2026-01-31T22:28:54.585936`
+- **Depths tested**: `2, 4, 6, 8, 10, 15, 20`
+- **Shots per circuit**: `1000`
 - **Transpilation**: `optimization_level=1`, `seed_transpiler=42`
-
----
 
 ## Reproducing Results
 
-To regenerate plots from the saved JSON:
+To regenerate the analysis plot from the saved JSON:
 
 ```bash
-python scripts/analyze_results.py results/depth_threshold_results.json
+python scripts/analyze_results.py --file results/depth_threshold_results.json
+```
+
+To regenerate the publication-style comparison figures:
+
+```bash
 python scripts/analyze_all_data.py
 ```
 
-To re-run the experiment (requires IBM Quantum credentials):
+To re-run the experiment from hardware credentials and configuration:
 
 ```bash
 python scripts/run_experiment.py
