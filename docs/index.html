@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Noise-Adaptive Depth Probe</title>
+    <meta
+      name="description"
+      content="Project page for empirical noise-adaptive circuit-depth thresholds on IBM Quantum Heron-class devices."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Manrope:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <h1>
+          Empirical Noise-Adaptive Circuit-Depth Thresholds on IBM Quantum
+          Heron-Class Devices
+        </h1>
+        <p class="hero-subtitle">
+          An empirical study of logical-depth-dependent fidelity decay on
+          <code>ibm_torino</code> using 4- and 5-qubit GHZ-state preparation
+          circuits.
+        </p>
+        <div class="hero-meta">
+          <p class="name">Jeorge D. Anderson II</p>
+          <p class="role">Independent Researcher</p>
+        </div>
+        <div class="hero-buttons">
+          <a class="btn btn-primary" href="assets/noise-adaptive-depth-probe-paper.pdf"
+            >Paper</a
+          >
+          <a class="btn" href="https://arxiv.org/">arXiv</a>
+          <a class="btn" href="https://doi.org/10.5281/zenodo.20162808">Zenodo</a>
+          <a class="btn" href="https://github.com/jeorgexyz/noise-adaptive-depth-probe"
+            >GitHub</a
+          >
+        </div>
+      </section>
+
+      <section class="figure-section">
+        <div class="figure-card">
+          <figure>
+            <img
+              src="assets/publication_figure.png"
+              alt="Publication figure comparing 4-qubit and 5-qubit fidelity trends as circuit depth increases."
+            />
+          </figure>
+        </div>
+      </section>
+
+      <div class="content-grid">
+        <div class="primary">
+          <div class="panel">
+            <h2>Abstract</h2>
+            <p>
+              We present an empirical study of circuit-depth thresholds on IBM
+              Quantum Heron-class hardware using 4- and 5-qubit GHZ-state
+              preparation circuits with logical depths from 2 to 20. On the
+              <code>ibm_torino</code> backend, we observe qubit-count-dependent
+              depth limits: 4-qubit circuits reach a fidelity plateau near 88%
+              beyond depth 10, while 5-qubit circuits show continued decay from
+              89.4% to 83.7% over the same range.
+            </p>
+            <p>
+              The observed fidelity at depth 20 substantially exceeds predictions
+              from an independent gate-error model, indicating coherent error
+              effects and partial cancellation not captured by simple accumulation
+              models. These results support calibration-based depth selection over
+              fixed heuristics for near-term hardware.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="section-title">Key Findings</h2>
+            <div class="stat-grid">
+              <div class="stat-card">
+                <p class="stat-label">4-Qubit Plateau</p>
+                <p class="stat-value">~88%</p>
+                <p class="stat-copy">
+                  Stable fidelity observed beyond logical depth 10.
+                </p>
+              </div>
+              <div class="stat-card">
+                <p class="stat-label">5-Qubit Decay</p>
+                <p class="stat-value">89.4% to 83.7%</p>
+                <p class="stat-copy">
+                  Continued degradation through increasing circuit depth.
+                </p>
+              </div>
+              <div class="stat-card">
+                <p class="stat-label">Error Modeling</p>
+                <p class="stat-value">88% vs. 61%</p>
+                <p class="stat-copy">
+                  Experimental results exceeded independent gate-error predictions.
+                </p>
+              </div>
+              <div class="stat-card">
+                <p class="stat-label">Recommended Depth</p>
+                <p class="stat-value">&le; 10</p>
+                <p class="stat-copy">
+                  Suggested maximum logical depth for &gt;85% fidelity workloads.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h2>Methodology</h2>
+            <ul class="method-list">
+              <li>IBM Quantum Heron-class hardware backend</li>
+              <li>4- and 5-qubit GHZ-state preparation circuits</li>
+              <li>Logical depth sweep from 2 to 20</li>
+              <li>Independent gate-error accumulation comparison model</li>
+              <li>Empirical fidelity analysis across increasing depth</li>
+            </ul>
+          </div>
+        </div>
+
+        <aside class="sidebar">
+          <div class="panel">
+            <h3>Project Links</h3>
+            <ul class="link-list">
+              <li><a href="assets/noise-adaptive-depth-probe-paper.pdf">PDF Paper</a></li>
+              <li><a href="https://arxiv.org/">arXiv Preprint</a></li>
+              <li>
+                <a href="https://doi.org/10.5281/zenodo.20162808">Zenodo Archive</a>
+              </li>
+              <li>
+                <a href="https://github.com/jeorgexyz/noise-adaptive-depth-probe"
+                  >Source Repository</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="panel">
+            <h3>Hardware</h3>
+            <div class="hw-list">
+              <p>IBM Quantum Heron-Class Backend</p>
+              <p><code>ibm_torino</code></p>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Citation</h3>
+            <p class="citation-text">
+              Anderson II, J.D. (2026). Empirical Noise-Adaptive Circuit-Depth
+              Thresholds on IBM Quantum Heron-Class Devices.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>
