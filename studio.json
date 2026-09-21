@@ -1,0 +1,385 @@
+{
+  "version": "1.0",
+  "identity": {
+    "id": "noise-adaptive-depth-probe",
+    "title": "Noise-Adaptive Depth Probe",
+    "kind": "Hardware Characterization",
+    "maturity": "Production-like",
+    "summary": "Empirical study of logical-depth-dependent fidelity degradation on IBM Quantum Heron-class hardware using 4- and 5-qubit GHZ preparation circuits, compared against independent gate-error model predictions.",
+    "subtitle": "Where circuit depth stops being survivable on real hardware"
+  },
+  "repo": {
+    "provider": "github",
+    "slug": "jeorgexyz/noise-adaptive-depth-probe",
+    "defaultBranch": "master",
+    "manifestPath": "studio.json"
+  },
+  "visibility": "public",
+  "taxonomy": {
+    "domain": "quantum-sensing",
+    "section": "research",
+    "tags": [
+      "IBM Quantum",
+      "Heron",
+      "GHZ",
+      "Fidelity",
+      "Circuit Depth",
+      "Published"
+    ],
+    "archiveStatus": "current"
+  },
+  "presentation": {
+    "stack": [
+      "Qiskit",
+      "IBM Quantum Heron",
+      "GHZ circuits",
+      "Python"
+    ],
+    "architecture": [
+      "GHZ state preparation at varying logical depth",
+      "Execution across Heron-class backends",
+      "Fidelity measurement per depth",
+      "Comparison against independent gate-error predictions",
+      "Threshold identification per qubit count"
+    ],
+    "artifacts": [
+      "Paper, software, and dataset DOIs",
+      "Depth-threshold analysis figures",
+      "Published documentation site"
+    ],
+    "featured": true,
+    "architectureFlow": {
+      "caption": "A measurement loop, not a straight pipeline. Two circuit widths and a depth sweep drive construction; physical qubits are chosen from calibration data; every result is compared against an independent gate-error prediction, and the sweep feeds back until the fidelity threshold is located.",
+      "nodes": [
+        {
+          "id": "q4",
+          "label": "4-Qubit GHZ",
+          "role": "circuit width",
+          "status": "input",
+          "x": -170,
+          "y": 0
+        },
+        {
+          "id": "q5",
+          "label": "5-Qubit GHZ",
+          "role": "circuit width",
+          "status": "input",
+          "x": 60,
+          "y": 0
+        },
+        {
+          "id": "calib",
+          "label": "Calibration Data",
+          "role": "T1/T2, gate errors",
+          "status": "input",
+          "x": 330,
+          "y": 110
+        },
+        {
+          "id": "construct",
+          "label": "Circuit Construction",
+          "role": "GHZ prep at logical depth d",
+          "status": "active",
+          "x": 60,
+          "y": 110
+        },
+        {
+          "id": "select",
+          "label": "Qubit Selection",
+          "role": "best physical qubits",
+          "status": "active",
+          "x": 330,
+          "y": 220
+        },
+        {
+          "id": "execute",
+          "label": "Heron Execution",
+          "role": "IBM Quantum backend",
+          "status": "active",
+          "x": 60,
+          "y": 220
+        },
+        {
+          "id": "counts",
+          "label": "Measured Counts",
+          "role": "shot statistics",
+          "status": "waiting",
+          "x": 60,
+          "y": 330
+        },
+        {
+          "id": "fidelity",
+          "label": "Fidelity Estimate",
+          "role": "per depth, per width",
+          "status": "active",
+          "x": 60,
+          "y": 440
+        },
+        {
+          "id": "model",
+          "label": "Gate-Error Model",
+          "role": "independent prediction",
+          "status": "input",
+          "x": 330,
+          "y": 440
+        },
+        {
+          "id": "compare",
+          "label": "Observed vs Predicted",
+          "role": "where the model is wrong",
+          "status": "active",
+          "x": 60,
+          "y": 550
+        },
+        {
+          "id": "threshold",
+          "label": "Depth Threshold",
+          "role": "4q plateaus ~88% past d=10",
+          "status": "idle",
+          "x": 60,
+          "y": 660
+        },
+        {
+          "id": "sweep",
+          "label": "Depth Sweep",
+          "role": "d = 1..20",
+          "status": "memory",
+          "x": -280,
+          "y": 330
+        }
+      ],
+      "edges": [
+        {
+          "id": "d-q4",
+          "source": "q4",
+          "target": "construct"
+        },
+        {
+          "id": "d-q5",
+          "source": "q5",
+          "target": "construct"
+        },
+        {
+          "id": "d-calib",
+          "source": "calib",
+          "target": "select"
+        },
+        {
+          "id": "d-select",
+          "source": "select",
+          "target": "execute",
+          "label": "qubit map"
+        },
+        {
+          "id": "d-construct",
+          "source": "construct",
+          "target": "execute"
+        },
+        {
+          "id": "d-exec",
+          "source": "execute",
+          "target": "counts"
+        },
+        {
+          "id": "d-counts",
+          "source": "counts",
+          "target": "fidelity"
+        },
+        {
+          "id": "d-fid",
+          "source": "fidelity",
+          "target": "compare"
+        },
+        {
+          "id": "d-model",
+          "source": "model",
+          "target": "compare",
+          "label": "prediction"
+        },
+        {
+          "id": "d-cmp",
+          "source": "compare",
+          "target": "threshold"
+        },
+        {
+          "id": "d-loop",
+          "source": "threshold",
+          "target": "sweep",
+          "label": "next depth",
+          "animated": true
+        },
+        {
+          "id": "d-sweep",
+          "source": "sweep",
+          "target": "construct",
+          "label": "d",
+          "animated": true
+        }
+      ]
+    }
+  },
+  "dossier": {
+    "pipeline": [
+      "Circuit Construction",
+      "Backend Selection",
+      "Execution",
+      "Fidelity Measurement",
+      "Threshold Analysis"
+    ],
+    "sampleCode": {
+      "path": "src/circuits.py",
+      "language": "python"
+    },
+    "snippets": [
+      {
+        "label": "Circuit Construction",
+        "path": "src/circuits.py",
+        "language": "python",
+        "summary": "GHZ preparation at parameterised logical depth."
+      },
+      {
+        "label": "Experiment Runner",
+        "path": "src/experiment.py",
+        "language": "python",
+        "summary": "Sweeps depth and qubit count across backends."
+      },
+      {
+        "label": "Fidelity Metrics",
+        "path": "src/metrics.py",
+        "language": "python",
+        "summary": "Fidelity estimation and comparison against gate-error predictions."
+      },
+      {
+        "label": "Qubit Selection",
+        "path": "scripts/find_good_qubits.py",
+        "language": "python",
+        "summary": "Chooses which physical qubits to run on from calibration data."
+      }
+    ],
+    "notes": [
+      "4-qubit fidelity plateaus near 88% beyond depth 10; 5-qubit continues degrading through depth 20.",
+      "Observed fidelity exceeds independent gate-error model predictions.",
+      "Backend calibration drifts between sessions, so cross-day comparisons need re-characterization."
+    ]
+  },
+  "documents": {
+    "readme": {
+      "path": "README.md",
+      "language": "markdown"
+    },
+    "architecture": {
+      "path": "docs/methodology.md",
+      "language": "markdown"
+    }
+  },
+  "workbench": {
+    "primaryLabel": "Open documentation site",
+    "surfaces": [
+      {
+        "id": "depth-site",
+        "label": "Site",
+        "type": "iframe",
+        "summary": "Published documentation site with methodology, interpretation, and the publication figure.",
+        "url": "https://jeorgexyz.github.io/noise-adaptive-depth-probe/",
+        "controls": [
+          "read methodology",
+          "interpretation",
+          "api reference"
+        ],
+        "metrics": [
+          "GitHub Pages",
+          "live"
+        ]
+      },
+      {
+        "id": "depth-source",
+        "label": "Source",
+        "type": "monaco",
+        "summary": "Repo-backed reader for the circuit and measurement code.",
+        "source": {
+          "path": "src/circuits.py",
+          "language": "python"
+        },
+        "controls": [
+          "switch file",
+          "inspect snippet",
+          "open repo"
+        ],
+        "metrics": [
+          "Qiskit",
+          "repo-backed"
+        ]
+      },
+      {
+        "id": "depth-notes",
+        "label": "Notes",
+        "type": "document",
+        "summary": "README-backed summary, records, and key findings.",
+        "source": {
+          "path": "README.md",
+          "language": "markdown"
+        },
+        "controls": [
+          "read summary",
+          "records",
+          "key findings"
+        ],
+        "metrics": [
+          "README",
+          "3 DOIs"
+        ]
+      }
+    ],
+    "runtimePanels": [
+      {
+        "title": "Findings",
+        "lines": [
+          "4q: plateaus near 88% past depth 10",
+          "5q: degrades through depth 20",
+          "observed > gate-error model prediction",
+          "hardware: IBM Heron-class"
+        ]
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "label": "Circuit construction",
+      "path": "src/circuits.py"
+    },
+    {
+      "label": "Depth threshold analysis",
+      "path": "paper/figures/depth_threshold_analysis.png"
+    },
+    {
+      "label": "Publication figure",
+      "path": "paper/figures/publication_figure.png"
+    },
+    {
+      "label": "Citation metadata",
+      "path": "CITATION.cff"
+    }
+  ],
+  "links": [
+    {
+      "label": "Paper (DOI)",
+      "url": "https://doi.org/10.5281/zenodo.20162808"
+    },
+    {
+      "label": "Software (DOI)",
+      "url": "https://doi.org/10.5281/zenodo.20172113"
+    },
+    {
+      "label": "Dataset (DOI)",
+      "url": "https://doi.org/10.5281/zenodo.20172472"
+    },
+    {
+      "label": "Documentation site",
+      "url": "https://jeorgexyz.github.io/noise-adaptive-depth-probe/"
+    },
+    {
+      "label": "GitHub Repository",
+      "url": "https://github.com/jeorgexyz/noise-adaptive-depth-probe"
+    }
+  ]
+}
