@@ -39,3 +39,6 @@ paper/*.log
 paper/*.out
 paper/*.synctex.gz
 paper/arxiv_submission.zip
+
+# Studio catalog manifest - not a results file
+!studio.json

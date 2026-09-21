@@ -104,21 +104,18 @@ Edit `configs/default.json` to customize:
 If you use this code or results in your research, please cite:
 
 ```bibtex
-@article{anonymous2026noise,
+@article{anderson2026noise,
   title={Empirical Noise-Adaptive Circuit Depth Thresholds for Near-Term Quantum Devices},
-  author={Anonymous},
+  author={Anderson, II, Jeorge D.},
   journal={arXiv preprint arXiv:XXXX.XXXXX},
-  year={2026}
+  year={2026},
+  note={ORCID: 0009-0006-1865-2404}
 }
 ```
 
 ## License
 
 MIT License - see LICENSE file for details
-
-## Contact
-
-For questions or collaboration inquiries, contact: [your email]
 
 ## Related Work
 

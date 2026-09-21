@@ -2,7 +2,8 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 authors:
   - family-names: "Anderson"
-    given-names: "Jeorge D., II"
+    given-names: "Jeorge D."
+    name-suffix: "II"
     orcid: "https://orcid.org/0009-0006-1865-2404"
 title: "Noise-Adaptive Circuit Depth Threshold Probe"
 version: 0.1.0
